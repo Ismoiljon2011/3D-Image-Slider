@@ -1,0 +1,179 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all ease-in-out 1s;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: true;
+}
+
+body {
+  background: #000;
+  overflow: hidden;
+}
+
+.banner {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+}
+
+.banner .slider {
+  position: absolute;
+  width: 200px;
+  height: 250px;
+  top: 10%;
+  left: calc(50% - 100px);
+  transform-style: preserve-3d;
+  transform: perspective(2000px);
+  animation: autoRun 60s linear 0s infinite normal none;
+}
+
+@keyframes autoRun {
+  from {
+    transform: perspective(2000px) rotateY(0);
+  }
+  to {
+    transform: perspective(2000px) rotateY(1turn);
+  }
+}
+
+.banner .slider .item {
+  position: absolute;
+  inset: 0 0 0 0;
+  transform: rotateY(
+      calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+    )
+    translateZ(550px);
+  cursor: pointer;
+}
+
+.banner .slider .item:hover {
+  transform: rotateY(
+      calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+    )
+    translateZ(550px) scale(1.2);
+}
+
+.banner .slider .item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* ==============================> black <============================== */
+.black {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: #000000ee;
+  top: 0;
+  left: 0;
+  text-align: center;
+  opacity: 0;
+  z-index: -1;
+  transition: all ease-in-out 1s;
+}
+
+.black .img {
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.black .spn {
+  font-size: 50px;
+  color: white;
+  position: absolute;
+  right: 15px;
+  top: 0px;
+  cursor: pointer;
+}
+
+/* ==============================> rgb <============================== */
+
+.rgb {
+  color: #fff;
+  font-size: 20px;
+  position: absolute;
+  top: calc(65% - 100px);
+  left: calc(40% - 100px);
+  /* transform: translate(-60%,-50%); */
+  width: 200px;
+  height: 200px;
+  background: #1c1f2b;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.rgb::after,
+.rgb::before {
+  content: "";
+  position: absolute;
+  /* background: conic-gradient(from var(--angle), #ff4545,#00ff99,#006aff,#ff0095,#ff4545); */
+  background: conic-gradient(from var(--angle), transparent 70%, #0f0);
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  padding: 2px;
+  border-radius: 10px;
+  animation: spin 10s linear infinite ;
+  /* filter: blur(3px); */
+}
+
+.rgb::before {
+  transform: rotate(180deg) translate(50%,50%);
+}
+
+.rgb2 {
+  color: #fff;
+  font-size: 20px;
+  position: absolute;
+  top: calc(65% - 100px);
+  left: calc(60% - 100px);
+  width: 200px;
+  height: 200px;
+  background: #1c1f2b;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.rgb2::after,
+.rgb2::before {
+  content: "";
+  position: absolute;
+  background: conic-gradient(from var(--angle), #ff4545,#00ff99,#006aff,#ff0095,#ff4545);
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  padding: 4px;
+  border-radius: 10px;
+  animation: spin 8s linear infinite ;
+}
+
+.rgb2::before {
+  filter: blur(30px);
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
